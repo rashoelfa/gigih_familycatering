@@ -26,10 +26,12 @@ ActiveRecord::Schema.define(version: 2022_04_20_044707) do
   end
 
   create_table "item_categories", force: :cascade do |t|
-    t.integer "item_id"
+    t.integer "menu_item_id"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_item_categories_on_category_id"
+    t.index ["menu_item_id"], name: "index_item_categories_on_menu_item_id"
   end
 
   create_table "menu_items", force: :cascade do |t|
@@ -41,11 +43,13 @@ ActiveRecord::Schema.define(version: 2022_04_20_044707) do
 
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id"
-    t.integer "item_id"
+    t.integer "menu_item_id"
     t.integer "quantity"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["menu_item_id"], name: "index_order_details_on_menu_item_id"
+    t.index ["order_id"], name: "index_order_details_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -54,6 +58,11 @@ ActiveRecord::Schema.define(version: 2022_04_20_044707) do
     t.date "order_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
+  add_foreign_key "item_categories", "categories"
+  add_foreign_key "item_categories", "menu_items"
+  add_foreign_key "order_details", "menu_items"
+  add_foreign_key "order_details", "orders"
 end

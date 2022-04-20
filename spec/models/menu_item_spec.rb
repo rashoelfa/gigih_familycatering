@@ -15,6 +15,12 @@ RSpec.describe MenuItem, type: :model do
     expect(menu_item.errors[:name]).to include("can't be blank")
   end
 
+  it 'is invalid without a price' do
+    menu_item = FactoryBot.build(:menu_item, price: nil)
+    menu_item.valid?
+    expect(menu_item.errors[:price]).to include("can't be blank")
+  end
+
   it 'is invalid with a duplicate name' do
     menu_item1 = FactoryBot.create(:menu_item, name: 'Nasi Uduk')
     menu_item2 = FactoryBot.build(:menu_item, name: 'Nasi Uduk')
