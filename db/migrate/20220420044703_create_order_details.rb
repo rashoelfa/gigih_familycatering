@@ -4,7 +4,6 @@ class CreateOrderDetails < ActiveRecord::Migration[7.0]
       t.belongs_to :order, foreign_key: true
       t.belongs_to :menu_item, foreign_key: true
       t.integer :quantity
-      t.string :status
 
       t.timestamps
     end
