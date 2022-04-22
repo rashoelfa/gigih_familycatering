@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2022_04_20_044707) do
     t.integer "order_id"
     t.integer "menu_item_id"
     t.integer "quantity"
-    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["menu_item_id"], name: "index_order_details_on_menu_item_id"
@@ -56,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_04_20_044707) do
     t.integer "customer_id"
     t.float "total"
     t.date "order_date"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
