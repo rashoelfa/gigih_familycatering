@@ -1,25 +1,108 @@
-# Rails on Replit
 
-This is a template to get you started with Rails on Replit. It's ready to go so you can just hit run and start coding!
+# Gigih Family Catering
 
-This template was generated using `rails new` (after you install the `rails` gem from the packager sidebar) so you can always do that if you prefer to set it up from scratch. The only had two make config changes we had to make to run it on Replit:
+Backend Path Final Project Assigment
 
-- bind the app on `0.0.0.0` instead of `localhost` (see `.replit`)
-- allow `*.repl.co` hosts (see `config/environments/development.rb`)
-- allow the app to be iframed on `replit.com` (see `config/application.rb`)
+## API
 
-## Running the app
+#### Get all menu items
 
-Simple hit run! You can edit the run command from the `.replit` file.
+```http
+  GET /menu
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `category`      | `boolean` |  request parameter to show menu item that have categories|
 
-## Running commands
+#### Create a menu item
 
-Start every command with `bundle exec` so that it runs in the context of the installed gems environment. The console pane will give you output from the server but you can run arbitrary command from the shell without stopping the server.
+```http
+  POST /menu/create
+```
 
-## Database
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | **Required**. Name of menu item |
+| `price`      | `float` | **Required**. price of menu item |
 
-SQLite would work in development but we don't recommend running it in production. Instead look into using the built-in [Replit database](http://docs.replit.com/misc/database). Otherwise you are welcome to connect databases from your favorite provider. 
+#### Update a menu item
 
-## Help
+```http
+  PUT /menu/update
+```
 
-If you need help you might be able to find an answer on our [docs](https://docs.replit.com) page. Alternatively you can [ask in the community](https://replit.com/talk/ask). Feel free to report bugs [here](https://replit.com/bugs) and give us feedback [here](https://Replit/feedback).
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `integer` | **Required**. id of menu item |
+| `name`      | `string` | **Required**. Name of menu item |
+| `price`      | `float` | **Required**. price of menu item |
+
+#### Delete a menu item
+
+```http
+  DELETE /menu/delete
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `integer` | **Required**. id of menu item |
+
+#### Get all category
+
+```http
+  GET /category
+```
+
+#### Insert category for a menu item
+
+```http
+  POST /menu/create/category
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `menu_item_id`      | `integer` | **Required**. menu_item_id of menu item |
+| `category_id`      | `integer` | **Required**. category_id of category |
+
+#### Show daily order
+
+```http
+  GET /order/daily
+```
+
+#### Create a customer order
+
+```http
+  POST /order/add
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `customer_id`      | `integer` | **Required**. customer_id of customer |
+| `menu_item_id`      | `integer` | **Required**. menu_item_id of menu item that chosen|
+| `quantity`      | `integer` | **Required**. quantity of menu item |
+
+#### Update a customer order to be paid
+
+```http
+  PUT /order/update
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `order_id`      | `integer` | **Required**. order_id of customer order |
+
+#### Create a another customer order this api didnt create order but only orderdetail
+
+```http
+  PUT /order/add/another
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `customer_id`      | `integer` | **Required**. customer_id of customer |
+| `menu_item_id`      | `integer` | **Required**. menu_item_id of menu item that chosen|
+| `quantity`      | `integer` | **Required**. quantity of menu item |
+
+
+
